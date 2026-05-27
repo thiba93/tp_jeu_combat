@@ -1,0 +1,17 @@
+bin/
+obj/
+.vs/
+.vscode/
+TestResults/
+__MACOSX/
+.dotnet/
+.nuget/
+dotnet-install.ps1
+*.user
+*.suo
+
+CONSIGNES_LOCALES.md
+clean_code.md
+cours_*.md
+polymorphisme.md
+tp_jeu_combat_cli.md
