@@ -1,0 +1,17 @@
+Bonjour, je vais presenter rapidement mon projet CombatGame.
+
+J'ai choisi une architecture en plusieurs projets pour separer les roles. Le projet Domain contient les elements les plus proches des regles du jeu, comme Hero, Enemy, Character, HeroClass et DamageCalculator. Le projet Application contient la logique de combat, les actions, les commandes, les etats et les factories. Le projet Infrastructure gere surtout la console, donc l'affichage et les entrees clavier. Le projet Cli sert juste a demarrer le jeu et a relier les classes ensemble. Enfin, le projet Tests contient les tests unitaires.
+
+J'ai fait ce decoupage parce que je voulais eviter d'avoir tout le jeu dans Program.cs. C'est plus simple pour retrouver le code, et aussi pour tester les morceaux importants sans devoir lancer toute la console. L'architecture reste volontairement simple, parce que le but est un petit jeu en ligne de commande et pas une grosse application.
+
+Pour les design patterns, j'en ai utilise plusieurs. Le pattern Factory sert a creer les heros, les ennemis et les actions de combat. Comme ca, la creation est regroupee dans des classes dediees, par exemple HeroFactory, EnemyFactory et CombatActionFactory.
+
+Le pattern Strategy est utilise avec ICombatAction. Chaque action de combat a sa propre classe, comme BasicAttackAction, HealAction ou les competences de classe. L'interet est de pouvoir changer ou ajouter une action sans modifier toute la logique du combat.
+
+Le pattern State sert a representer les moments du combat. Il y a par exemple PlayerTurnState, EnemyTurnState, BetweenWavesState, VictoryState et DefeatState. Chaque etat gere une partie du deroulement, ce qui evite d'avoir une grosse suite de if dans une seule methode.
+
+Le pattern Command est utilise pour transformer le choix du joueur en action executable. Par exemple AttackCommand ou HealCommand. Cela permet de separer le menu console de ce qui se passe vraiment dans le combat.
+
+Enfin, le pattern Observer sert pour les evenements du combat. CombatEventPublisher envoie les messages aux observers, comme JournalCombatObserver et ConsoleCombatObserver. Comme ca, le jeu peut afficher les messages et garder un journal sans que les actions connaissent directement la console.
+
+En resume, j'ai choisi cette architecture et ces patterns pour avoir un code plus lisible, plus facile a tester, et assez evolutif si on veut ajouter des actions, des ennemis ou des regles plus tard.
